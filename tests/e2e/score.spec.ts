@@ -7,8 +7,8 @@ test('score should increase over time', async ({ page }) => {
   const initialScore = await page.textContent('div:has-text("Score:")');
   expect(initialScore).toBe('Score: 0');
 
-  await page.waitForTimeout(2000);
-
-  const scoreAfterTime = await page.textContent('div:has-text("Score:")');
-  expect(scoreAfterTime).not.toBe('Score: 0');
+  await page.waitForFunction(async (initialScoreText) => {
+    const scoreElement = Array.from(document.querySelectorAll('div')).find(el => el.textContent?.startsWith('Score:'));
+    return scoreElement && scoreElement.textContent !== initialScoreText;
+  }, initialScore);
 });
