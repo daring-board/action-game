@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   PLAYER_WIDTH,
   PLAYER_HEIGHT,
@@ -8,6 +8,8 @@ import {
   ENEMY_HEIGHT,
   GAME_WIDTH,
   GAME_HEIGHT,
+  ENEMY_SPAWN_INTERVAL_MIN,
+  ENEMY_SPAWN_INTERVAL_MAX,
 } from "./constants";
 
 const Game = () => {
@@ -15,6 +17,7 @@ const Game = () => {
   const [enemies, setEnemies] = useState<{ x: number; y: number }[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const enemyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -35,13 +38,21 @@ const Game = () => {
   useEffect(() => {
     if (gameOver) return;
 
-    const enemyInterval = setInterval(() => {
+    const spawnEnemy = () => {
       const newEnemy = {
         x: Math.random() * (GAME_WIDTH - ENEMY_WIDTH),
         y: -ENEMY_HEIGHT,
       };
       setEnemies((prevEnemies) => [...prevEnemies, newEnemy]);
-    }, 1000);
+
+      const randomInterval =
+        Math.random() * (ENEMY_SPAWN_INTERVAL_MAX - ENEMY_SPAWN_INTERVAL_MIN) +
+        ENEMY_SPAWN_INTERVAL_MIN;
+      enemyTimeoutRef.current = setTimeout(spawnEnemy, randomInterval);
+    };
+
+    const enemyTimeoutRef = { current: null as NodeJS.Timeout | null };
+    spawnEnemy();
 
     const gameLoop = setInterval(() => {
       setScore((score) => score + 1);
@@ -65,7 +76,9 @@ const Game = () => {
     }, 1000 / 60);
 
     return () => {
-      clearInterval(enemyInterval);
+      if (enemyTimeoutRef.current) {
+        clearTimeout(enemyTimeoutRef.current);
+      }
       clearInterval(gameLoop);
     };
   }, [gameOver, enemies, playerX]);
