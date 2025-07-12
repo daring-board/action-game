@@ -13,6 +13,7 @@ import {
 const Game = () => {
   const [playerX, setPlayerX] = useState(GAME_WIDTH / 2 - PLAYER_WIDTH / 2);
   const [enemies, setEnemies] = useState<{ x: number; y: number }[]>([]);
+  const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Game = () => {
     }, 1000);
 
     const gameLoop = setInterval(() => {
+      setScore((score) => score + 1);
       setEnemies((prevEnemies) =>
         prevEnemies
           .map((enemy) => ({ ...enemy, y: enemy.y + 5 }))
@@ -73,6 +75,9 @@ const Game = () => {
       className="relative overflow-hidden bg-gray-100"
       style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
     >
+      <div className="absolute top-2 left-2 text-2xl text-black">
+        Score: {score}
+      </div>
       <div
         className="absolute bg-blue-500"
         style={{
