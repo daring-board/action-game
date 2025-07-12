@@ -13,8 +13,9 @@
 - [ ] ゲームオーバー後のリスタート機能 ([#3](https://github.com/daring-board/action-game/issues/3))
 - [ ] 敵の出現パターンの多様化 ([#4](https://github.com/daring-board/action-game/issues/4))
 - [ ] CSS in JSライブラリ (例: Styled Components, Emotion) の導入によるスタイルのコンポーネント化 ([#2](https://github.com/daring-board/action-game/issues/2))
-- [ ] 定数の共通化 (例: `src/constants.ts`) ([#5](https://github.com/daring-board/action-game/issues/5))
-- [ ] ページのタイトル変更 ([#6](https://github.com/daring-board/action-game/issues/6))
+- [x] 定数の共通化 (例: `src/constants.ts`) ([#5](https://github.com/daring-board/action-game/issues/5))
+- [x] ページのタイトル変更 ([#6](https://github.com/daring-board/action-game/issues/6))
 - [ ] コンテンツの変更 ([#7](https://github.com/daring-board/action-game/issues/7))
-- [ ] デザインの調整 ([#8](https://github.com/daring-board/action-game/issues/8))
+- [x] デザインの調整 ([#8](https://github.com/daring-board/action-game/issues/8))
+- [x] E2Eテストの接続先URLを修正
 - [ ] ファビコンの変更 ([#9](https://github.com/daring-board/action-game/issues/9))
