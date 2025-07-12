@@ -59,3 +59,20 @@
 1.  **タスクの洗い出し:** `docs/tasks.md`に今後のタスクを記述します。
 2.  **Issueの作成:** `docs/tasks.md`に記載されたタスクを、`gh issue create`コマンドを使用してGitHubのIssueとして登録します。
 3.  **タスクとIssueの関連付け:** `docs/tasks.md`の各タスクに、対応するGitHub Issueへのリンクを追記します。
+
+## 開発フロー
+
+1.  **タスクの確認:** `docs/tasks.md`で対応するタスクとIssue番号を確認します。
+2.  **ブランチの作成:** `git checkout -b feat/issue-XX-description` のように、Issue番号を含んだわかりやすい名前のブランチを作成します。
+3.  **実装:** 機能の実装や修正を行います。
+4.  **テストの作成と実行:**
+    *   必要に応じて単体テストやE2Eテストを作成します。
+    *   `npm run dev &` で開発サーバーをバックグラウンドで起動します。
+    *   `npx playwright test` でテストを実行します。
+    *   テストが完了したら `kill` コマンドで開発サーバーを停止します。
+5.  **コミット:** `git commit -m "feat: Short description (closes #XX)"` のように、Issueを閉じるキーワードを含んだコミットメッセージでコミットします。
+6.  **プルリクエストの作成:**
+    *   `git push origin branch-name` でブランチをプッシュします。
+    *   `gh pr create` コマンドでプルリクエストを作成し、レビューを依頼します。
+7.  **マージとブランチの削除:** レビューが完了し、プルリクエストがマージされたら、ローカルとリモートの作業ブランチは削除します。
+8.  **mainブランチの更新:** `git checkout main` と `git pull origin main` でローカルのmainブランチを最新の状態に保ちます。
