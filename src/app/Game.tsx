@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-const PLAYER_WIDTH = 50;
-const PLAYER_HEIGHT = 50;
-const ENEMY_WIDTH = 50;
-const ENEMY_HEIGHT = 50;
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
+import {
+  PLAYER_WIDTH,
+  PLAYER_HEIGHT,
+  ENEMY_WIDTH,
+  ENEMY_HEIGHT,
+  GAME_WIDTH,
+  GAME_HEIGHT,
+} from "./constants";
 
 const Game = () => {
   const [playerX, setPlayerX] = useState(GAME_WIDTH / 2 - PLAYER_WIDTH / 2);
@@ -69,20 +70,14 @@ const Game = () => {
 
   return (
     <div
-      style={{
-        position: "relative",
-        width: GAME_WIDTH,
-        height: GAME_HEIGHT,
-        backgroundColor: "#f0f0f0",
-        overflow: "hidden",
-      }}
+      className="relative overflow-hidden bg-gray-100"
+      style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
     >
       <div
+        className="absolute bg-blue-500"
         style={{
-          position: "absolute",
           width: PLAYER_WIDTH,
           height: PLAYER_HEIGHT,
-          backgroundColor: "blue",
           left: playerX,
           bottom: 0,
         }}
@@ -90,27 +85,17 @@ const Game = () => {
       {enemies.map((enemy, i) => (
         <div
           key={i}
+          className="absolute bg-red-500"
           style={{
-            position: "absolute",
             width: ENEMY_WIDTH,
             height: ENEMY_HEIGHT,
-            backgroundColor: "red",
             left: enemy.x,
             top: enemy.y,
           }}
         />
       ))}
       {gameOver && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "48px",
-            color: "black",
-          }}
-        >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-black">
           Game Over
         </div>
       )}
