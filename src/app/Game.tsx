@@ -51,27 +51,27 @@ const Game = () => {
       enemyTimeoutRef.current = setTimeout(spawnEnemy, randomInterval);
     };
 
-    const enemyTimeoutRef = { current: null as NodeJS.Timeout | null };
     spawnEnemy();
 
     const gameLoop = setInterval(() => {
       setScore((score) => score + 1);
-      setEnemies((prevEnemies) =>
-        prevEnemies
+      setEnemies((prevEnemies) => {
+        const updatedEnemies = prevEnemies
           .map((enemy) => ({ ...enemy, y: enemy.y + 5 }))
-          .filter((enemy) => enemy.y < GAME_HEIGHT)
-      );
+          .filter((enemy) => enemy.y < GAME_HEIGHT);
 
-      // Check for collisions
-      enemies.forEach((enemy) => {
-        if (
-          playerX < enemy.x + ENEMY_WIDTH &&
-          playerX + PLAYER_WIDTH > enemy.x &&
-          GAME_HEIGHT - PLAYER_HEIGHT < enemy.y + ENEMY_HEIGHT &&
-          GAME_HEIGHT > enemy.y
-        ) {
-          setGameOver(true);
-        }
+        // Check for collisions
+        updatedEnemies.forEach((enemy) => {
+          if (
+            playerX < enemy.x + ENEMY_WIDTH &&
+            playerX + PLAYER_WIDTH > enemy.x &&
+            GAME_HEIGHT - PLAYER_HEIGHT < enemy.y + ENEMY_HEIGHT &&
+            GAME_HEIGHT > enemy.y
+          ) {
+            setGameOver(true);
+          }
+        });
+        return updatedEnemies;
       });
     }, 1000 / 60);
 
@@ -81,7 +81,7 @@ const Game = () => {
       }
       clearInterval(gameLoop);
     };
-  }, [gameOver, enemies, playerX]);
+  }, [gameOver, playerX]);
 
   return (
     <div
