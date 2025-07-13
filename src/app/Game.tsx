@@ -10,6 +10,7 @@ import {
   GAME_HEIGHT,
   ENEMY_SPAWN_INTERVAL_MIN,
   ENEMY_SPAWN_INTERVAL_MAX,
+  GAME_TIME_LIMIT,
 } from "./constants";
 
 const Game = () => {
@@ -61,7 +62,15 @@ const Game = () => {
     spawnEnemy();
 
     const gameLoop = setInterval(() => {
-      setScore((score) => score + 1);
+      // Score and time limit check
+      setScore((prevScore) => {
+        const newScore = prevScore + 1;
+        if (newScore / 60 >= GAME_TIME_LIMIT) {
+          setGameOver(true);
+        }
+        return newScore;
+      });
+
       setEnemies((prevEnemies) => {
         const updatedEnemies = prevEnemies
           .map((enemy) => ({ ...enemy, y: enemy.y + 5 }))
