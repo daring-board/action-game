@@ -19,6 +19,13 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
   const enemyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const restartGame = () => {
+    setPlayerX(GAME_WIDTH / 2 - PLAYER_WIDTH / 2);
+    setEnemies([]);
+    setScore(0);
+    setGameOver(false);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
@@ -113,8 +120,14 @@ const Game = () => {
         />
       ))}
       {gameOver && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-black">
-          Game Over
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+          <div className="text-5xl text-white">Game Over</div>
+          <button
+            onClick={restartGame}
+            className="mt-4 rounded bg-blue-500 px-4 py-2 text-white"
+          >
+            Restart
+          </button>
         </div>
       )}
     </div>
