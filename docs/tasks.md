@@ -10,7 +10,7 @@
 ## 今後のタスク
 
 - [x] スコア機能の追加 ([#1](https://github.com/daring-board/action-game/issues/1))
-- [ ] ゲームオーバー後のリスタート機能 ([#3](https://github.com/daring-board/action-game/issues/3))
+- [x] ゲームオーバー後のリスタート機能 ([#3](https://github.com/daring-board/action-game/issues/3))
 - [x] 敵の出現パターンの多様化 ([#4](https://github.com/daring-board/action-game/issues/4))
 - [ ] CSS in JSライブラリ (例: Styled Components, Emotion) の導入によるスタイルのコンポーネント化 ([#2](https://github.com/daring-board/action-game/issues/2))
 - [x] 定数の共通化 (例: `src/constants.ts`) ([#5](https://github.com/daring-board/action-game/issues/5))
