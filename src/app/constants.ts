@@ -5,4 +5,5 @@ export const ENEMY_HEIGHT = 50;
 export const GAME_WIDTH = 800;
 export const GAME_HEIGHT = 600;
 export const ENEMY_SPAWN_INTERVAL_MIN = 500;
-export const ENEMY_SPAWN_INTERVAL_MAX = 1500;
+export const ENEMY_SPAWN_INTERVAL_MAX = 2000;
+export const GAME_TIME_LIMIT = 5; // 5 seconds
